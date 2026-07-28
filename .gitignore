@@ -7,3 +7,8 @@
 #Python local cache
 __pycache__/
 *.py[cod]
+#Database
+*.db
+*.sqlite3
+#Testing scripts
+shortener_app/try.py
