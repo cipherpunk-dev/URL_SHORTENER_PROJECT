@@ -1,10 +1,10 @@
-import secrets  #for generating random keys(better h random se)
 import validators
 from fastapi import FastAPI as FAPI,HTTPException,Depends,Request
 from fastapi.responses import RedirectResponse
 
 from sqlalchemy.orm import Session 
 from .database import SessionLocal,engine                 #from database.py
+from . import keygen
 
 from . import schemas,models #dot means from this directory
 
@@ -30,10 +30,9 @@ def raise_bad_request(message): #just for my convenience , helper function kinda
 def create_url(url: schemas.URLBase, db: Session = Depends(get_db)):
     if not validators.url(url.target_url):
         raise_bad_request(message="Your provided URL is not valid")
+    key = keygen.create_random_key()
+    secret_key = keygen.create_random_key(length=8)
 
-    chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    key = "".join(secrets.choice(chars) for _ in range(5))
-    secret_key = "".join(secrets.choice(chars) for _ in range(8))
     db_url = models.URL(
         target_url=url.target_url, key=key, secret_key=secret_key
     )
