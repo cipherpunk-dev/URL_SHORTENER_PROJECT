@@ -1,0 +1,32 @@
+# Automatically detect text files and normalize to LF in the repository
+* text=auto
+
+# Source code
+*.py   text
+*.js   text
+*.jsx  text
+*.ts   text
+*.tsx  text
+*.css  text
+*.html text
+*.json text
+*.md   text
+*.yml  text
+*.yaml text
+
+# Shell scripts should always use LF
+*.sh text eol=lf
+
+# Windows batch files should use CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files (don't modify line endings)
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.svg  text
+*.pdf  binary
+
